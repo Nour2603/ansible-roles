@@ -1,38 +1,43 @@
-Role Name
-=========
+# tst
 
-A brief description of the role goes here.
+An Ansible role that installs Apache and deploys an `index.html` page.
 
-Requirements
-------------
+## What it does
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+- Installs the `apache2` package
+- Copies `files/index.html` to `/var/www/html/index.html`
 
-Role Variables
---------------
+## Requirements
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+- Ubuntu or Debian target machines
+- Ansible 2.12 or newer
+- A user with sudo rights (`become: true`)
 
-Dependencies
-------------
+## Example playbook
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+```yaml
+---
+- hosts: test
+  become: true
+  roles:
+    - tst
+```
 
-Example Playbook
-----------------
+## Usage
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+```
+ansible-playbook -i inventory.ini first.yaml
+```
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+## Notes
 
-License
--------
+Apache uses port 80. Do not run this role on machines that already run
+nginx on port 80.
 
-BSD
+## License
 
-Author Information
-------------------
+MIT
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+## Author
+
+Nour2603
